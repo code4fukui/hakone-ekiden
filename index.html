@@ -31,13 +31,10 @@ onload = async () => {
   document.body.appendChild(div);
   const map = await LeafletGSI.initMap(div);
 
-  /*
   const routes = await fetchJSON("./data/routes.json");
   for (const route of routes) {
-    console.log(route)
-    L.polyline(route, { color: "red", weight: 3 }).addTo(map);
+    L.polyline(route.map(ll => [ll[1], ll[0]]), { color: route == routes[0] ? "red" : "blue", weight: 3 }).addTo(map);
   }
-  */
 
   const teams = await fetchJSON("./data/teams.json");
   console.log(teams);
