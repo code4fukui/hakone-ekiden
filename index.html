@@ -31,7 +31,15 @@ onload = async () => {
   document.body.appendChild(div);
   const map = await LeafletGSI.initMap(div);
 
-  const teams = await fetchJSON("./teams.json");
+  /*
+  const routes = await fetchJSON("./data/routes.json");
+  for (const route of routes) {
+    console.log(route)
+    L.polyline(route, { color: "red", weight: 3 }).addTo(map);
+  }
+  */
+
+  const teams = await fetchJSON("./data/teams.json");
   console.log(teams);
   const rw = 80;
   const iw = 40;
@@ -68,7 +76,7 @@ onload = async () => {
         map.fitBounds(lls);
       }
     }
-	  setInterval(show, 10 * 1000);
+	  setTiemout(show, 10 * 1000);
   };
   show();
 };
