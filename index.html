@@ -4,13 +4,22 @@
 body {
   margin: 0;
 }
+header {
+  margin: .5em;
+}
 h1 {
-  margin: 0;
-  font-size: 110%;
+  margin: ;
+  font-size: 130%;
+}
+a {
+  color: gray !important;
 }
 </style>
+<header>
 <h1>箱根駅伝データビューワー</h1>
-<a href=https://nagix.github.io/>草薙 昭彦</a>開発・提供、箱根駅伝2022の3Dライブ中継「<a href=https://nagix.github.io/hakone-ekiden/>箱根駅伝 3D</a>」のデータを表示してみました。
+<a href=https://nagix.github.io/>草薙 昭彦</a>開発・提供、箱根駅伝2022の3Dライブ中継「<a href=https://nagix.github.io/hakone-ekiden/>箱根駅伝 3D</a>」のデータを表示してみました。<br>
+10秒間隔で更新します。(<a href=https://github.com/code4fukui/hakone-ekiden>forked src on GitHub</a>)
+</header>
 <script type="module">
 import { LeafletGSI } from "https://js.sabae.cc/LeafletGSI.js";
 import { CSV } from "https://js.sabae.cc/CSV.js";
@@ -45,7 +54,7 @@ onload = async () => {
       const ll = [item[1], item[2]];
       const team = teams[item[0]];
       const nrunner = item[8];
-      const name = team.name + (team.runners ? "<br>" + team.runners[nrunner] : "");
+      const name = team.name + (team.runners ? "<br>" + nrunner + "区 " + team.runners[nrunner] : "");
       const marker = L.marker(ll, { title: name, icon: icondata[item[0]] });
       const credit = `DATA: <a href=https://github.com/nagix/hakone-ekiden>箱根駅伝 3D</a> by <a href=https://nagix.github.io/>草薙 昭彦</a>`;
       marker.bindPopup(name + "<br>" + credit);
