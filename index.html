@@ -1,145 +1,66 @@
-<!DOCTYPE html>
-<html lang="ja_JP">
-<head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-39988758-2"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-39988758-2');
-	</script>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.css" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@7.4.1/swiper-bundle.min.css" />
-	<link rel="stylesheet" href="hakone-ekiden.css" />
-	<title>箱根駅伝 3D</title>
-	<meta name="description" content="A real-time 3D digital map of Hakone Ekiden. This data visualization was produced by Akihiko Kusanagi." />
-	<meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height, initial-scale=1" />
-	<meta property="og:title" content="箱根駅伝 3D" />
-	<meta property="og:description" content="A real-time 3D digital map of Hakone Ekiden. This data visualization was produced by Akihiko Kusanagi." />
-	<meta property="og:locale" content="ja_JP" />
-	<link rel="canonical" href="https://nagix.github.io/hakone-ekiden" />
-	<meta property="og:url" content="https://nagix.github.io/hakone-ekiden" />
-	<meta property="og:site_name" content="箱根駅伝 3D" />
-	<meta property="og:image" content="https://nagix.github.io/hakone-ekiden/screenshot1.jpg" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@nagix" />
-	<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/mapbox-gl-animated-popup@v0.2.1/dist/mapbox-gl-animated-popup.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/loaders/GLTFLoader.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/three@0.136.0/examples/js/utils/SkeletonUtils.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/swiper@7.4.1/swiper-bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.2.2/dist/chartjs-plugin-annotation.min.js"></script>
-</head>
-<body>
-	<div id="map">
-		<div class="map-overlay">
-			<div class="map-overlay-inner">
-				<div class="title">
-					<span>箱根駅伝 3D</span> <span class="tag live">LIVE</span>
-				</div>
-				<div class="tracking-position">
-					<span id="trip">往路</span><span id="section">1</span>区
-					<span id="distance">0.00</span> km
-					<span id="tracking-status" class="tracking-status">追跡中</span>
-				</div>
-				<div class="tracking-gauge">
-					<div id="progress" class="tracking-progress"></div>
-				</div>
-				<div id="tracking-info" class="tracking-info">
-					<div id="tracking-marker" class="tracking-marker"></div>
-					<div class="tracking-runner">
-						<span id="tracking-team"></span><br>
-						<span id="tracking-runner"></span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="panel" class="panel swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<canvas id="chart-speed"></canvas>
-				</div>
-				<div class="swiper-slide">
-					<canvas id="chart-elevation"></canvas>
-				</div>
-			</div>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
-		</div>
-		<div id="teams-bg" class="bg">
-			<div id="teams" class="menu">
-				<div>チームの順位・追跡</div>
-				<div class="table">
-					<div class="table-cell">
-						<div id="team-1" class="menu-item"></div>
-						<div id="team-2" class="menu-item"></div>
-						<div id="team-3" class="menu-item"></div>
-						<div id="team-4" class="menu-item"></div>
-						<div id="team-5" class="menu-item"></div>
-						<div id="team-6" class="menu-item"></div>
-						<div id="team-7" class="menu-item"></div>
-						<div id="team-8" class="menu-item"></div>
-						<div id="team-9" class="menu-item"></div>
-						<div id="team-10" class="menu-item"></div>
-						<div id="team-11" class="menu-item"></div>
-					</div>
-					<div class="table-cell">
-						<div id="team-12" class="menu-item"></div>
-						<div id="team-13" class="menu-item"></div>
-						<div id="team-14" class="menu-item"></div>
-						<div id="team-15" class="menu-item"></div>
-						<div id="team-16" class="menu-item"></div>
-						<div id="team-17" class="menu-item"></div>
-						<div id="team-18" class="menu-item"></div>
-						<div id="team-19" class="menu-item"></div>
-						<div id="team-20" class="menu-item"></div>
-						<div id="team-21" class="menu-item"></div>
-						<div class="menu-item"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="views-bg" class="bg">
-			<div id="views" class="menu">
-				<div>カメラ切り替え</div>
-				<div id="auto-view" class="menu-item active"><span></span><i class="fas fa-random"></i>自動切替</div>
-				<div id="normal-view" class="menu-item"><span></span><i class="fas fa-crosshairs"></i>追跡のみ</div>
-				<div id="front-view" class="menu-item"><span></span><i class="fas fa-user"></i>前方</div>
-				<div id="front-above-view" class="menu-item"><span></span><i class="fas fa-users"></i>前方上空</div>
-				<div id="back-view" class="menu-item"><span></span><i class="fas fa-road"></i>後方</div>
-				<div id="back-above-view" class="menu-item"><span></span><i class="fas fa-route"></i>後方上空</div>
-				<div id="drone-view" class="menu-item"><span></span><i class="fas fa-street-view"></i>ドローン</div>
-				<div id="helicopter-view" class="menu-item"><span></span><i class="fas fa-helicopter"></i>ヘリコプター</div>
-				<div id="bird-view" class="menu-item"><span></span><i class="fas fa-dove"></i>鳥</div>
-			</div>
-		</div>
-		<div id="info-bg" class="bg">
-			<div class="info">
-				<div>箱根駅伝 3D について</div>
-				<div>
-					<p><strong>操作方法</strong></p>
-					<p>
-						ドラッグ/上下左右矢印キー: 移動<br>
-						マウスホイール/+-キー: ズーム<br>
-						右マウス/Ctrl + ドラッグ: 方角/傾き<br>
-						2本指ピンチ: 方角/ズーム<br>
-						2本指ドラッグ: 傾き<br>
-						Shift + 左右矢印キー: 方角<br>
-						Shift + 上下矢印キー: 傾き<br>
-						チームアイコンクリック/タップ: 追跡<br>
-						地図クリック/タップ: 追跡解除
-					<hr>
-					<p>このデータビジュアライゼーションは <a href="https://nagix.github.io" target="_blank">草薙 昭彦</a> により作成されました。</p>
-					<p>ソースコードは <a href="https://github.com/nagix/hakone-ekiden" target="_blank">GitHub リポジトリ</a> にて公開されています。</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script src="hakone-ekiden.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>箱根駅伝データビューワー</title>
+<style>
+body {
+  margin: 0;
+}
+h1 {
+  margin: 0;
+  font-size: 110%;
+}
+</style>
+<h1>箱根駅伝データビューワー</h1>
+<a href=https://nagix.github.io/>草薙 昭彦</a>開発・提供、箱根駅伝2022の3Dライブ中継「<a href=https://nagix.github.io/hakone-ekiden/>箱根駅伝 3D</a>」のデータを表示してみました。
+<script type="module">
+import { LeafletGSI } from "https://js.sabae.cc/LeafletGSI.js";
+import { CSV } from "https://js.sabae.cc/CSV.js";
+import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
+
+onload = async () => {
+  const div = document.createElement("div");
+  div.style.height = "90vh";
+  document.body.appendChild(div);
+  const map = await LeafletGSI.initMap(div);
+
+  const teams = await fetchJSON("./teams.json");
+  console.log(teams);
+  const rw = 80;
+  const iw = 40;
+  const icondata = teams.map((t, idx) => L.icon({ iconUrl: "markers/" + idx + ".png", iconSize: [iw, iw], iconAnchor: [iw / 2, iw / 2], popupAnchor: [0, -iw] }));
+
+  const iconlayer = L.layerGroup();
+  iconlayer.addTo(map);
+  const lls = [];
+  let icons = [];
+  let first = true;
+  const show = async () => {
+	  const url = "https://mini-tokyo.appspot.com/hakone";
+	  const data = await fetchJSON(url);
+	  console.log(data);
+    for (const icon of icons) {
+      iconlayer.removeLayer(icon);
+    }
+    icons = [];
+	  for (const item of data.points) {
+      const ll = [item[1], item[2]];
+      const team = teams[item[0]];
+      const nrunner = item[8];
+      const name = team.name + (team.runners ? "<br>" + team.runners[nrunner] : "");
+      const marker = L.marker(ll, { title: name, icon: icondata[item[0]] });
+      const credit = `DATA: <a href=https://github.com/nagix/hakone-ekiden>箱根駅伝 3D</a> by <a href=https://nagix.github.io/>草薙 昭彦</a>`;
+      marker.bindPopup(name + "<br>" + credit);
+      icons.push(marker);
+      iconlayer.addLayer(marker);
+      lls.push(ll);
+    }
+    if (first) {
+      first = false;
+      if (lls.length) {
+        map.fitBounds(lls);
+      }
+    }
+	  setInterval(show, 10 * 1000);
+  };
+  show();
+};
+</script>
