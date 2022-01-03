@@ -2106,6 +2106,6 @@
     ],
     "terrain": {
         "source": "10b512-7-113-50",
-        "exaggeration": 1.5
+        "exaggeration": 1
     }
 }
