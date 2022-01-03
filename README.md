@@ -1,10 +1,8 @@
-# 箱根駅伝 3D
+# 箱根駅伝 3D ビューワー
 
-A real-time 3D digital map of Hakone Ekiden.
+A real-time 3D digital map of Hakone Ekiden. (forked [箱根駅伝 3D](https://github.com/nagix/hakone-ekiden))
 
-![Screenshot](https://nagix.github.io/hakone-ekiden/screenshot1.jpg)
-
-See a [Live Demo](https://nagix.github.io/hakone-ekiden).
+See a [Live Demo](https://code4fukui.github.io/hakone-ekiden/).
 
 ## License
 
