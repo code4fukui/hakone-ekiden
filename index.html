@@ -36,13 +36,15 @@ onload = async () => {
   const routes = await fetchJSON("./data/routes.json");
   const sections = await fetchJSON("./data/sections.json");
   const colors = ["red", "blue"];
+  const type = ["往路", "復路"];
   for (let i = 0; i < routes.length; i++) {
     const route = routes[i].map(ll => [ll[1], ll[0]]);
     const section = sections[i];
     L.polyline(route, { color: colors[i], weight: 3 }).addTo(map);
     for (const p of section) {
-      const marker = L.marker(route[p.index], { title: p.name }).addTo(map);
-      marker.bindPopup(p.name + "<br>" + credit);
+      const title = type[i] + " " + p.name;
+      const marker = L.marker(route[p.index], { title }).addTo(map);
+      marker.bindPopup(title + "<br>" + credit);
     }
   }
 
