@@ -71,7 +71,7 @@ onload = async () => {
       const ll = [item[1], item[2]];
       const team = teams[item[0]];
       const nrunner = item[8];
-      const name = team.name + (team.runners ? "<br>" + nrunner + "区 " + team.runners[nrunner] : "");
+      const name = team.name + (team.runners ? "<br>" + nrunner + "区 " + team.runners[nrunner - 1] : "");
       const marker = L.marker(ll, { title: name, icon: icondata[item[0]] });
       marker.bindPopup(name + "<br>" + credit);
       icons.push(marker);
