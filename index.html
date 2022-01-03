@@ -25,6 +25,8 @@ import { LeafletGSI } from "https://js.sabae.cc/LeafletGSI.js";
 import { CSV } from "https://js.sabae.cc/CSV.js";
 import { fetchJSON } from "https://js.sabae.cc/fetchJSON.js";
 
+const credit = `DATA: <a href=https://github.com/nagix/hakone-ekiden>箱根駅伝 3D</a> by <a href=https://nagix.github.io/>草薙 昭彦</a>`;
+
 onload = async () => {
   const div = document.createElement("div");
   div.style.height = "90vh";
@@ -32,8 +34,16 @@ onload = async () => {
   const map = await LeafletGSI.initMap(div);
 
   const routes = await fetchJSON("./data/routes.json");
-  for (const route of routes) {
-    L.polyline(route.map(ll => [ll[1], ll[0]]), { color: route == routes[0] ? "red" : "blue", weight: 3 }).addTo(map);
+  const sections = await fetchJSON("./data/sections.json");
+  const colors = ["red", "blue"];
+  for (let i = 0; i < routes.length; i++) {
+    const route = routes[i].map(ll => [ll[1], ll[0]]);
+    const section = sections[i];
+    L.polyline(route, { color: colors[i], weight: 3 }).addTo(map);
+    for (const p of section) {
+      const marker = L.marker(route[p.index], { title: p.name }).addTo(map);
+      marker.bindPopup(p.name + "<br>" + credit);
+    }
   }
 
   const teams = await fetchJSON("./data/teams.json");
@@ -61,7 +71,6 @@ onload = async () => {
       const nrunner = item[8];
       const name = team.name + (team.runners ? "<br>" + nrunner + "区 " + team.runners[nrunner] : "");
       const marker = L.marker(ll, { title: name, icon: icondata[item[0]] });
-      const credit = `DATA: <a href=https://github.com/nagix/hakone-ekiden>箱根駅伝 3D</a> by <a href=https://nagix.github.io/>草薙 昭彦</a>`;
       marker.bindPopup(name + "<br>" + credit);
       icons.push(marker);
       iconlayer.addLayer(marker);

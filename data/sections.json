@@ -1,0 +1,76 @@
+[
+  [
+    {
+      "name": "<i class=\"far fa-flag\"></i>スタート 読売新聞社前",
+      "index": 0,
+      "distance": 0,
+      "record": 20.974587002474177
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>鶴見中継所",
+      "index": 84,
+      "distance": 21.359121097519537,
+      "record": 21.035128937347523
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>戸塚中継所",
+      "index": 226,
+      "distance": 44.43348892351547,
+      "record": 21.591783083454363
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>平塚中継所",
+      "index": 359,
+      "distance": 65.81535189365847,
+      "record": 20.744999987623746
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>小田原中継所",
+      "index": 510,
+      "distance": 86.73322688117908,
+      "record": 17.712562973508206
+    },
+    {
+      "name": "<i class=\"fas fa-flag-checkered\"></i>ゴール 芦ノ湖",
+      "index": 1012,
+      "distance": 107.52088759314357
+    }
+  ],
+  [
+    {
+      "name": "<i class=\"far fa-flag\"></i>スタート 芦ノ湖",
+      "index": 0,
+      "distance": 0,
+      "record": 21.726307131090458
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>小田原中継所",
+      "index": 451,
+      "distance": 20.742588224877196,
+      "record": 20.698424540803007
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>平塚中継所",
+      "index": 604,
+      "distance": 42.01596900292473,
+      "record": 20.134210055242526
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>戸塚中継所",
+      "index": 761,
+      "distance": 63.43093853112574,
+      "record": 20.412455085006606
+    },
+    {
+      "name": "<i class=\"fas fa-flag\"></i>鶴見中継所",
+      "index": 916,
+      "distance": 86.57072442054573,
+      "record": 20.164279580823365
+    },
+    {
+      "name": "<i class=\"fas fa-flag-checkered\"></i>ゴール 読売新聞社前",
+      "index": 1003,
+      "distance": 109.64762216304358
+    }
+  ]
+]
