@@ -4,7 +4,7 @@
 
 A real-time 3D digital map of the Hakone Ekiden, a famous university relay marathon in Japan. This project visualizes the entire race course, tracks runner positions, and displays team information on an interactive 3D map.
 
-This repository is based on the original "Hakone Ekiden 3D" project by Akihiko Kusanagi ([@nagix](https://twitter.com/nagix)). See original work: [nagix.github.io/hakone-ekiden/](https://nagix.github.io/hakone-ekiden/).
+This repository is based on the original "Hakone Ekiden 3D" project by Akihiko Kusanagi ([@nagix](https://twitter.com/nagix)). See original work: nagix.github.io/hakone-ekiden/ *(demo unavailable)*.
 
 ## Demo
 

@@ -2,7 +2,7 @@
 
 日本で有名な大学駅伝競走「箱根駅伝」のリアルタイム3Dデジタルマップです。本プロジェクトでは、レースコース全体を可視化し、ランナーの位置を追跡して、インタラクティブな3Dマップ上にチーム情報を表示します。
 
-本リポジトリは、草薙 昭彦氏（[@nagix](https://twitter.com/nagix)）によるオリジナルの「箱根駅伝 3D」プロジェクトをベースにしています。オリジナル作品はこちらをご覧ください: [nagix.github.io/hakone-ekiden/](https://nagix.github.io/hakone-ekiden/)。
+本リポジトリは、草薙 昭彦氏（[@nagix](https://twitter.com/nagix)）によるオリジナルの「箱根駅伝 3D」プロジェクトをベースにしています。オリジナル作品はこちらをご覧ください: nagix.github.io/hakone-ekiden/ *(demo unavailable)*。
 
 ## デモ
 
